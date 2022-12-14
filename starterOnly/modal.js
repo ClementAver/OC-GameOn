@@ -66,40 +66,54 @@ function testNumber(number) {
   }
 }
 
+// test date
+function testDate(date) {
+  if (date == "Invalid Date") {
+    console.log(`${date} n'est pas une date valide`);
+    return false;
+  } else if (typeof date === "object") {
+    console.log(`${date} est une date valide`);
+    return true;
+  }
+}
+
 //test exist
-function testExist(being) {
-  if (being) {
+function testTournament(tournament) {
+  if (tournament) {
+    console.log(`${tournament.value} est sélectionné`);
     return true;
   } else {
-    console.log(`${being} does not exist`);
+    console.log(`aucun tournoi sélectionné`);
     return false;
   }
 }
 
+function testCheck(checkbox) {
+  if (checkbox.checked) {
+    console.log(`${checkbox.id} est cochée`);
+    return true;
+  } else {
+    console.log(`${checkbox.id} n'est pas cochée`);
+    return false;
+  }
+}
 // launch submit
 function submitModal(e) {
   e.preventDefault();
 
-  // inputs values
+  // inputs
   let first = document.getElementById("first").value;
   let last = document.getElementById("last").value;
   let email = document.getElementById("email").value;
   let birthdate = new Date(document.getElementById("birthdate").value);
   let quantity = document.getElementById("quantity").value;
   let tournament = document.querySelector("#tournament input:checked");
-  let checkbox1 = document.getElementById("checkbox1").checked;
-  let checkbox2 = document.getElementById("checkbox2").checked;
+  let checkbox1 = document.getElementById("checkbox1");
+  let checkbox2 = document.getElementById("checkbox2");
 
   // verifications
-  if (testLength(first) && testLength(last) && testEmail(email) && testNumber(quantity) && testExist(tournament)) {
-    console.log(first);
-    console.log(last);
-    console.log(email);
-    console.log(birthdate);
-    console.log(quantity);
-    console.log(tournament);
-    console.log(checkbox1);
-    console.log(checkbox2);
+  if (testLength(first) && testLength(last) && testEmail(email) && testDate(birthdate) && testNumber(quantity) && testTournament(tournament) && testCheck(checkbox1)) {
+    testCheck(checkbox2);
   }
 }
 
