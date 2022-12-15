@@ -14,7 +14,6 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -188,6 +187,11 @@ main {
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  min-height: 60vh;
+  justify-content: space-between;
 }
 
 label {
@@ -197,6 +201,7 @@ label {
   display: inline-block;
   margin-bottom: 11px;
 }
+
 input {
   padding: 8px;
   border: 0.8px solid #ccc;
@@ -324,7 +329,8 @@ input[data-error]::after {
   transform: rotate(-45deg);
 }
 .btn-submit,
-.btn-signup {
+.btn-signup,
+.btn-validation {
   background: #fe142f;
   display: block;
   margin: 0 auto;
@@ -334,6 +340,25 @@ input[data-error]::after {
   color: #fff;
   cursor: pointer;
   border: 0;
+}
+
+.invalid-fields {
+  color: #fe142f;
+  font-size: 12px;
+  display: none;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.invalid-field {
+  display: block;
+}
+
+.validation-message {
+  text-align: center;
+  font-weight: 400;
+  font-size: 2rem;
 }
 /* custom select styles */
 .custom-select {
@@ -406,6 +431,7 @@ input[data-error]::after {
   font-weight: normal;
   font-size: 16px;
 }
+
 .hero-section {
   min-height: 93vh;
   border-radius: 10px;
