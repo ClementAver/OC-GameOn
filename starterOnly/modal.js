@@ -15,9 +15,9 @@ const modalCross = document.querySelectorAll(".close");
 const formData = document.querySelectorAll(".formData");
 const invalidMessages = document.querySelectorAll(".invalid-fields");
 const validationFeedback = document.getElementById("validation-message");
-console.log(modalBtn);
+
 //inputs
-const firstNAme = document.getElementById("first");
+const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
 const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
@@ -57,30 +57,50 @@ modalBtn[2].addEventListener("click", function () {
 });
 
 // tests the length of a string
-function testLength(string) {
-  return string.length >= 2;
+function testLength(string, element) {
+  if (string.length >= 2) {
+    element.style.border = "none";
+    return true;
+  } else {
+    element.style.border = "2px solid #fe142f";
+    return false;
+  }
 }
 
 // tests email
-function isEmail(email) {
+function isEmail(email, element) {
   // regex : "RFC2822 Email Validation" by Tripleaxis on regexr.com
   const regExpMail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
-  return regExpMail.test(email.value);
+  if (regExpMail.test(email.value)) {
+    element.style.border = "none";
+    return true;
+  } else {
+    element.style.border = "2px solid #fe142f";
+    return false;
+  }
 }
 
 // tests date
-function isDate(date) {
+function isDate(date, element) {
   if (new Date(date.value) == "Invalid Date") {
+    element.style.border = "2px solid #fe142f";
     return false;
   } else if (typeof new Date(date.value) === "object") {
+    element.style.border = "none";
     return true;
   }
 }
 
 // tests number
-function isNumber(number) {
+function isNumber(number, element) {
   const regExpNumber = /^[0-9]{1,2}/;
-  return regExpNumber.test(number.value);
+  if (regExpNumber.test(number.value)) {
+    element.style.border = "none";
+    return true;
+  } else {
+    element.style.border = "2px solid #fe142f";
+    return false;
+  }
 }
 
 // tests if checked
@@ -93,12 +113,13 @@ function isNotNull(variable) {
 }
 
 //validates inputs
-function isValid(callback, argument, index) {
-  if (callback(argument)) {
+function isValid(callback, argument, index, element) {
+  if (callback(argument, element)) {
     invalidMessages[index].classList.remove("invalid-field");
     return true;
   } else {
     invalidMessages[index].classList.add("invalid-field");
+
     throw new Error(`The field n°${index} isn't valid`);
   }
 }
@@ -107,12 +128,12 @@ function isValid(callback, argument, index) {
 function allValid() {
   const wishedTournament = document.querySelector("#tournament .checkbox-input:checked");
   try {
-    //isValid(testLength, first.value, 0);
-    //isValid(testLength, last.value, 1);
-    //isValid(isEmail, email, 2);
-    //isValid(isDate, birthdate, 3);
-    //isValid(isNumber, quantity, 4);
-    //isValid(isNotNull, wishedTournament, 5);
+    isValid(testLength, firstName.value, 0, firstName);
+    isValid(testLength, lastName.value, 1, lastName);
+    isValid(isEmail, email, 2, email);
+    isValid(isDate, birthdate, 3, birthdate);
+    isValid(isNumber, quantity, 4, quantity);
+    isValid(isNotNull, wishedTournament, 5);
     isValid(testCheck, checkbox1, 6);
   } catch (err) {
     var error = err;
@@ -135,7 +156,22 @@ function validate(e) {
     launchModal(modalbg, 1);
     wishedTournament = document.querySelector("#tournament .checkbox-input:checked");
 
-    fetch("", {
+    // detele when production
+    console.log(
+      "this would be sent to the server :" +
+        JSON.stringify({
+          name: first.value,
+          surname: last.value,
+          email: email.value,
+          birthdate: new Date(birthdate.value),
+          quantity: +quantity.value,
+          tournament: wishedTournament.value,
+          newsletter: checkbox2.checked,
+        })
+    );
+
+    /*
+fetch("", {
       method: "POST",
       headers: JSON.stringify({
         Accept: "application/json",
@@ -151,8 +187,7 @@ function validate(e) {
         newsletter: checkbox2.checked,
       }),
     });
-  } else {
-    console.log("le formulaire n'est valide");
+*/
   }
 }
 
