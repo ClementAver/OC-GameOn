@@ -27,7 +27,7 @@ const checkbox2 = document.getElementById("checkbox2");
 
 // launches modals
 function launchModal(element, index) {
-  element[index].style.display = "block";
+  element[index].style.display = "flex";
 }
 
 // closes modals
