@@ -22,6 +22,7 @@ const lastName = document.getElementById("last");
 const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
+let wishedTournament = document.querySelector("#tournament .checkbox-input:checked");
 const checkbox1 = document.getElementById("checkbox1");
 const checkbox2 = document.getElementById("checkbox2");
 
@@ -61,10 +62,9 @@ function testLength(string, element) {
   if (string.length >= 2) {
     element.style.border = "none";
     return true;
-  } else {
-    element.style.border = "2px solid #fe142f";
-    return false;
   }
+  element.style.border = "2px solid #fe142f";
+  return false;
 }
 
 // tests email
@@ -74,10 +74,9 @@ function isEmail(email, element) {
   if (regExpMail.test(email.value)) {
     element.style.border = "none";
     return true;
-  } else {
-    element.style.border = "2px solid #fe142f";
-    return false;
   }
+  element.style.border = "2px solid #fe142f";
+  return false;
 }
 
 // tests date
@@ -92,15 +91,13 @@ function isDate(date, element) {
 }
 
 // tests number
-function isNumber(number, element) {
-  const regExpNumber = /^[0-9]{1,2}/;
-  if (regExpNumber.test(number.value)) {
+function isNumberOneNinetyNine(number, element) {
+  if (number.value.length > 0 && number.value >= 0 && number.value <= 99) {
     element.style.border = "none";
     return true;
-  } else {
-    element.style.border = "2px solid #fe142f";
-    return false;
   }
+  element.style.border = "2px solid #fe142f";
+  return false;
 }
 
 // tests if checked
@@ -117,34 +114,27 @@ function isValid(callback, argument, index, element) {
   if (callback(argument, element)) {
     invalidMessages[index].classList.remove("invalid-field");
     return true;
-  } else {
-    invalidMessages[index].classList.add("invalid-field");
-
-    throw new Error(`The field n°${index} isn't valid`);
   }
+  invalidMessages[index].classList.add("invalid-field");
+  throw new Error(`The field n°${index} isn't valid`);
 }
 
 // checks if all inputs are valid
 function allValid() {
-  const wishedTournament = document.querySelector("#tournament .checkbox-input:checked");
+  wishedTournament = document.querySelector("#tournament .checkbox-input:checked");
   try {
     isValid(testLength, firstName.value, 0, firstName);
     isValid(testLength, lastName.value, 1, lastName);
     isValid(isEmail, email, 2, email);
     isValid(isDate, birthdate, 3, birthdate);
-    isValid(isNumber, quantity, 4, quantity);
+    isValid(isNumberOneNinetyNine, quantity, 4, quantity);
     isValid(isNotNull, wishedTournament, 5);
     isValid(testCheck, checkbox1, 6);
   } catch (err) {
     var error = err;
     console.error(err);
   }
-
-  if (!error) {
-    return true;
-  } else {
-    return false;
-  }
+  return !error;
 }
 
 // launches submit
@@ -154,9 +144,8 @@ function validate(e) {
   if (allValid()) {
     closeModal(modalbg, 0);
     launchModal(modalbg, 1);
-    wishedTournament = document.querySelector("#tournament .checkbox-input:checked");
 
-    // detele when production
+    // delete when production
     console.log(
       "this would be sent to the server :" +
         JSON.stringify({
@@ -164,7 +153,7 @@ function validate(e) {
           surname: last.value,
           email: email.value,
           birthdate: new Date(birthdate.value),
-          quantity: +quantity.value,
+          quantity: quantity.value,
           tournament: wishedTournament.value,
           newsletter: checkbox2.checked,
         })
