@@ -110,8 +110,8 @@ function isNotNull(variable) {
 }
 
 //validates inputs
-function isValid(callback, argument, index, element) {
-  if (callback(argument, element)) {
+function isValid(callback, value, index, element) {
+  if (callback(value, element)) {
     invalidMessages[index].classList.remove("invalid-field");
     return true;
   }
@@ -160,7 +160,7 @@ function validate(e) {
     );
 
     /*
-fetch("", {
+fetch("url", {
       method: "POST",
       headers: JSON.stringify({
         Accept: "application/json",
