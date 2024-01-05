@@ -15,6 +15,6 @@ Game On was the project that introduced us to JavaScript, we had to implement th
 </p>
 
 <p align="center">
-  <img src="README/Screenshot-form.png" alt="Screenshot of the subscription form" width="600"/>
+  <img src="README/Screenshot-subForm.png" alt="Screenshot of the subscription form" width="600"/>
 </p>
 
