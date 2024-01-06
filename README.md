@@ -11,10 +11,10 @@ Game On was the project that introduced us to JavaScript, we had to implement th
 <br/><br/>
 
 <p align="center">
-  <img src="README/Screenshot-homepage.png" alt="Screenshot of the webpage" width="600"/>
+  <img src="starterOnly/README/Screenshot-homepage.png" alt="Screenshot of the webpage" width="600"/>
 </p>
 
 <p align="center">
-  <img src="README/Screenshot-subForm.png" alt="Screenshot of the subscription form" width="600"/>
+  <img src="starterOnly/README/Screenshot-subForm.png" alt="Screenshot of the subscription form" width="600"/>
 </p>
 
