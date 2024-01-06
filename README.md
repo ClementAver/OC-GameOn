@@ -1,5 +1,20 @@
-# Projet GameOn
-1. Forkez ce repo ;
-2. Il est conseillé d'utiliser VisualStudio Code et vous pouvez utiliser Docker, mais ce n'est pas obligatoire ;
-3. Il n'y a aucune dépendance ;
-4. Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.
+# Game On
+
+<div>
+<img alt="Static Badge" src="https://img.shields.io/badge/HTML%205-orange">
+<img alt="Static Badge" src="https://img.shields.io/badge/CSS%203-blue">
+<img alt="Static Badge" src="https://img.shields.io/badge/JavaScript-yellow">
+</div>
+
+Game On was the project that introduced us to JavaScript, we had to implement the behaviour of a subscription form for a competition and event focused business.
+
+<br/><br/>
+
+<p align="center">
+  <img src="starterOnly/README/Screenshot-homepage.png" alt="Screenshot of the webpage" width="600"/>
+</p>
+
+<p align="center">
+  <img src="starterOnly/README/Screenshot-subForm.png" alt="Screenshot of the subscription form" width="600"/>
+</p>
+
